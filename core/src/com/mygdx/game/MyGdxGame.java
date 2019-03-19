@@ -10,6 +10,7 @@ public class MyGdxGame extends ApplicationAdapter {
     SpriteBatch batch;
     Background background;
     Hero hero;
+    Asteroid asteroid;//
 
     // Разобраться с кодом
     // Не давать кораблю вылетать за лвую и правую сторону экрана
@@ -26,6 +27,7 @@ public class MyGdxGame extends ApplicationAdapter {
         batch = new SpriteBatch();
         background = new Background();
         hero = new Hero();
+        asteroid = new Asteroid();//
     }
 
     @Override
@@ -37,12 +39,14 @@ public class MyGdxGame extends ApplicationAdapter {
         batch.begin();
         background.render(batch);
         hero.render(batch);
+        asteroid.render(batch);
         batch.end();
     }
 
     public void update(float dt) {
         background.update(dt);
         hero.update(dt);
+        asteroid.update(dt);//
     }
 
     @Override
