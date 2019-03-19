@@ -4,17 +4,20 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 
 public class Hero {
     private Texture texture;
     private Vector2 position;
     private float speed;
+    private Circle circle;//
 
     public Hero() {
         texture = new Texture("ship64.png");
         position = new Vector2(640.0f, 360.0f);
         speed = 300.0f;
+        circle = new Circle(position.x - 32,position.y - 32,32);
     }
 
     public void render(SpriteBatch batch) {
@@ -59,5 +62,7 @@ public class Hero {
                 position.y -= speed * dt;
             }
         }
+        circle.setPosition(position.x - 32, position.y - 32);//перемещаем центр окружности вслед за кораблем
+
     }
 }
