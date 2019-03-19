@@ -11,6 +11,11 @@ public class Hero {
     private Texture texture;
     private Vector2 position;
     private float speed;
+
+    public Circle getCircle() {
+        return circle;
+    }
+
     private Circle circle;//
 
     public Hero() {

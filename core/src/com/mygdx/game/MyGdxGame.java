@@ -12,16 +12,6 @@ public class MyGdxGame extends ApplicationAdapter {
     Hero hero;
     Asteroid asteroid;//
 
-    // Разобраться с кодом
-    // Не давать кораблю вылетать за лвую и правую сторону экрана
-    // Верхнюю и нижнюю сторону экрана корабль должен пролетать насквозь
-    // * Добавить астероид, который летает по экрану по типу звезд
-    // и проверять столкновение этого астероида с кораблем, при столкновении
-    // "пересоздавать" астероид
-
-    // Варианты игры: Гонки, Герои 3, Марио, RTS, tower defence, косм. стрелялка вид (сбоку/сверху)
-    // worms, battle toads
-
     @Override
     public void create() {
         batch = new SpriteBatch();
@@ -46,7 +36,7 @@ public class MyGdxGame extends ApplicationAdapter {
     public void update(float dt) {
         background.update(dt);
         hero.update(dt);
-        asteroid.update(dt);//
+        asteroid.update(dt, hero);//
     }
 
     @Override
