@@ -19,9 +19,20 @@ public class Hero {
 
     public void render(SpriteBatch batch) {
         batch.draw(texture, position.x - 32.0f, position.y - 32.0f);
-    }
 
-    public void update(float dt) {
+        position.x = position.x > 1251.0f ? 1251.0f : position.x; // делаем чтобы корабль не уходил за левую и правую области видимости
+        position.x = position.x < 35.5f ? 35.5f : position.x;
+
+        if (position.y < -32.0f) { //делаем так чтобы корабль появлялся с противовположной стороны при пересечении верхней/нижней области видимости
+            position.y = 782.0f;
+        }
+        if (position.y > 782.0f) {
+            position.y = 32.0f;
+        }
+
+    } // рисуем корабль по центру
+
+    public void update(float dt) { //настраиваем управление кораблем для клавиатуры и тачскрина
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             position.x += speed * dt;
         }
