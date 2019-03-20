@@ -9,23 +9,19 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 public class VectorGame extends ApplicationAdapter {
-    SpriteBatch batch;
-    Texture textureAsteroids;
-    TextureRegion astReg;
-    Rock rock;
-
 
     private class Rock {
+
         Vector2 position;
         Vector2 velocity;
         TextureRegion region;
         Vector2 mousePosition;
         Vector2 tmp;
-
         public Rock(TextureRegion region) {
             this.position = new Vector2(640,360);
             this.velocity = new Vector2(0,0);
             this.region = region;
+            this.mousePosition = new Vector2(0,0);
             this.tmp = new Vector2(0,0);
         }
 
@@ -35,29 +31,31 @@ public class VectorGame extends ApplicationAdapter {
 
         public void update(float dt) {
             position.mulAdd(velocity, dt);
-            velocity.y -= 400.0f * dt;
-
+            //velocity.y -= 400.0f * dt; //сила притяжения
 
             if (position.y < 32.0f){
                 position.y = 32.0f;
                 velocity.y *= -0.7f;
             }
 
-            if (Gdx.input.justTouched()){
+            if (Gdx.input.isTouched()){
                 mousePosition.x = Gdx.input.getX();
                 mousePosition.y = 720.0f - Gdx.input.getY();
 
-                tmp.set(mousePosition);
-                tmp.sub(position);
-                tmp.nor();
-                tmp.scl(200.0f);
+                tmp.set(mousePosition); //складываем в временный вектор позицию мышки
+                tmp.sub(position); //вычетаем вектор позиции камня
+                tmp.nor(); //нормируем и получаем направление
+                tmp.scl(20.0f);//ускоряем камень в направлении мышки
 
                 velocity.add(tmp);
             }
-
         }
-
     }
+
+    SpriteBatch batch;
+    Texture textureAsteroids;
+    TextureRegion astReg;
+    Rock rock;
 
     @Override
     public void create() {
